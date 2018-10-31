@@ -7,5 +7,11 @@ functions:
     handler: handler.hello
     events:
      - http:
-         path: users/create
+         path: /
+         method: get
+  getUser:
+    handler: handler.getUser
+    events:
+     - http:
+         path: /getUser
          method: get
