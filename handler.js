@@ -5,23 +5,24 @@ module.exports.hello = async (event, context) => {
     statusCode: 200,
     body: JSON.stringify({
       message: 'HELLO WORLD FUNCTION!',
-      // input: event,
+      input: event,
     }),
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
 
 module.exports.getUser = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'GET USRE FUNCTION!',
+      message: 'GET USER FUNCTION!',
       // input: event,
     }),
   };
+};
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+module.exports.printStream = async (event, context) => {  
+    event.Records.forEach(function(record) {
+    var payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
+    console.log('Decoded payload:', payload);
+  });
 };

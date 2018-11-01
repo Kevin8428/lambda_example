@@ -7,11 +7,23 @@ functions:
     handler: handler.hello
     events:
      - http:
-         path: /
+         path: /${self:service}
          method: get
   getUser:
     handler: handler.getUser
     events:
      - http:
-         path: /getUser
+         path: /${self:service}/getUser
          method: get
+  printStream:
+    handler: handler.printStream
+    name: test-stream-name
+    description: this is a test of consuming kinesis stream
+    events:
+      - stream:
+        arn: arn:aws:kinesis:us-east-1:#{AWS::AccountId}:stream/testStream
+        batchSize: 10
+        startingPosition: LATEST
+        enabled: true
+plugins:
+  - serverless-offline
